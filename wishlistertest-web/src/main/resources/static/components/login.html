@@ -1,0 +1,19 @@
+<section>
+    <div>
+        <div>
+            <h2>Login</h2>
+        </div>
+    </div>
+</section>
+
+<section>
+
+    <form ng-controller="CreateUsuarioController as createCtrl" ng-submit="createCtrl.addUsuario()">
+        <input type="text" ng-model="createCtrl.usuario.email" placeholder="Entre com o email">
+        <input type="text" ng-model="createCtrl.usuario.nickName" placeholder="Entre com o nickName">
+        <input type="text" ng-model="createCtrl.usuario.password" placeholder="Entre com o password">
+
+        <input type="submit" value="Cadastrar">
+    </form>
+
+</section>
