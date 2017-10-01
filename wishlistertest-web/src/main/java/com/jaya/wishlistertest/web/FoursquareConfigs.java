@@ -1,4 +1,4 @@
-package com.jaya.wishlistertest.resource;
+package com.jaya.wishlistertest.web;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
