@@ -6,14 +6,9 @@
     </div>
 </section>
 
-<section>
+<section ng-init="init()">
 
-    <form ng-controller="CreateUsuarioController as createCtrl" ng-submit="createCtrl.addUsuario()">
-        <input type="text" ng-model="createCtrl.usuario.email" placeholder="Entre com o email">
-        <input type="text" ng-model="createCtrl.usuario.nickName" placeholder="Entre com o nickName">
-        <input type="text" ng-model="createCtrl.usuario.password" placeholder="Entre com o password">
+    <a  ng-model="data" href="https://foursquare.com/oauth2/authenticate?client_id=WQP3GYEKDDELPBTMTZAQ1VF04TKHJGPIMRWSFWBBHZT4MZEX&response_type=code&redirect_uri=http://localhost:3000/foursquare/callback">Entre com o foursquare</a>
 
-        <input type="submit" value="Cadastrar">
-    </form>
 
 </section>

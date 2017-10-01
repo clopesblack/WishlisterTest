@@ -1,0 +1,11 @@
+server:
+  port: 3000
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
+
+foursquare:
+  host: https://foursquare.com/oauth2/authenticate
+  clientId: WQP3GYEKDDELPBTMTZAQ1VF04TKHJGPIMRWSFWBBHZT4MZEX

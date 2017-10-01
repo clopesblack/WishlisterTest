@@ -13,5 +13,11 @@ define(['appModule'],function(moduleName) {
 
             var self = this;
 
+                $scope.init = function(){
+                    $scope.data = n;
+                }
+
         }]);//Controller
+
+        .service()
 });
