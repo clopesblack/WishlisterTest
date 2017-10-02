@@ -66,12 +66,8 @@ public class FoursquareService {
     public List<VenueItemVO> requestVenues(FoursquareUserVO userVO, String accessToken) {
 
         ItemVO wishlist = filterWishList(userVO.getLists());
-
         String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.VENUES_LISTS_PATH + "/" + wishlist.getId()), accessToken);
         FoursquareListResponseVO response = restTemplate.getForObject(endPoint, FoursquareListResponseVO.class);
-
-        //TODO Populate pictures in venues consuming https://developer.foursquare.com/docs/venues/photos
-
         return response.getResponse().getList().getListItems().getItems();
     }
 

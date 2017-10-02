@@ -1,5 +1,6 @@
 package com.jaya.wishlistertest.service.vo.foursquare.user;
 
+import com.jaya.wishlistertest.service.vo.foursquare.PhotoVo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

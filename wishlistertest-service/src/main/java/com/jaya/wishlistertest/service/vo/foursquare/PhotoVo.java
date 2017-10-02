@@ -1,4 +1,4 @@
-package com.jaya.wishlistertest.service.vo.foursquare.user;
+package com.jaya.wishlistertest.service.vo.foursquare;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,6 +18,13 @@ public class PhotoVo {
     public String getPhotoIn(Integer resolution) {
         if (prefix != null && suffix != null) {
             return prefix + resolution + 'x' + resolution + suffix;
+        }
+        return "";
+    }
+
+    public String getPhotoWith(Integer width) {
+        if (prefix != null && suffix != null) {
+            return prefix + "width" + width + suffix;
         }
         return "";
     }
