@@ -12,3 +12,9 @@ foursquare:
   clientId: WQP3GYEKDDELPBTMTZAQ1VF04TKHJGPIMRWSFWBBHZT4MZEX
   clientSecret: D41DBYIKBQQYWBR5MTG2O1BQCSSKMSY2EQNHT52AA5OFLPUQ
   v: 20171001
+  login: http://localhost:3000/foursquare/callback
+  accesstoken: http://localhost:3000/foursquare/callback/accesstoken
+  recentechekin: /checkins/recent
+  wishlist: /lists
+  users: /users
+  oauthpath: /oauth2

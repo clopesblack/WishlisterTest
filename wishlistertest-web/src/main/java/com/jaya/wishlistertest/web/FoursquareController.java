@@ -2,6 +2,7 @@ package com.jaya.wishlistertest.web;
 
 import com.jaya.wishlistertest.service.FoursquareService;
 import com.jaya.wishlistertest.service.vo.foursquare.list.VenueItemVO;
+import com.jaya.wishlistertest.service.vo.foursquare.recentcheckin.RecentVO;
 import com.jaya.wishlistertest.service.vo.foursquare.user.FoursquareUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class FoursquareController {
 
         List<VenueItemVO> venues = service.requestVenues(userVO, accessToken);
         model.addAttribute("wishlist", venues);
+
+        List<RecentVO> recents = service.requestRecentChekinFriends(accessToken);
+        model.addAttribute("recents", recents);
 
         return "home";
     }

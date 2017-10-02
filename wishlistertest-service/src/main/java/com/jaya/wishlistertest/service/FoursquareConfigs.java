@@ -17,4 +17,10 @@ public class FoursquareConfigs {
     private String clientId;
     private String clientSecret;
     private String v;
+    private String login;
+    private String accesstoken;
+    private String recentechekin;
+    private String wishlist;
+    private String users;
+    private String oauthpath;
 }

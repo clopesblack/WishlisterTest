@@ -2,6 +2,8 @@ package com.jaya.wishlistertest.service;
 
 import com.jaya.wishlistertest.service.vo.foursquare.list.FoursquareListResponseVO;
 import com.jaya.wishlistertest.service.vo.foursquare.list.VenueItemVO;
+import com.jaya.wishlistertest.service.vo.foursquare.recentcheckin.FoursquareRecentResponseVO;
+import com.jaya.wishlistertest.service.vo.foursquare.recentcheckin.RecentVO;
 import com.jaya.wishlistertest.service.vo.foursquare.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,12 +19,6 @@ import java.util.stream.Collectors;
 @Service
 public class FoursquareService {
 
-    private final String LOGIN_REDIRECT_END_POINT = "http://localhost:3000/foursquare/callback";
-    private final String ACCESS_TOKEN_REDIRECT_END_POINT = "http://localhost:3000/foursquare/callback/accesstoken";
-    private final String OAUTH_PATH = "/oauth2";
-    private final String USERS_PATH = "/users";
-    private final String VENUES_LISTS_PATH = "/lists";
-
     private FoursquareConfigs foursquareConfigs;
     private RestTemplate restTemplate;
 
@@ -35,11 +31,11 @@ public class FoursquareService {
 
     public String requestUserAccessToken(String code) {
 
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getHost() + this.OAUTH_PATH + "/access_token")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getHost() + this.foursquareConfigs.getOauthpath() + "/access_token")
                 .queryParam("client_id", this.foursquareConfigs.getClientId())
                 .queryParam("client_secret", this.foursquareConfigs.getClientSecret())
                 .queryParam("grant_type", "authorization_code")
-                .queryParam("redirect_uri", this.ACCESS_TOKEN_REDIRECT_END_POINT)
+                .queryParam("redirect_uri", this.foursquareConfigs.getAccesstoken())
                 .queryParam("code", code);
 
         FoursquareAcessTokenResponseVO response = restTemplate.getForObject(uriBuilder.toUriString(), FoursquareAcessTokenResponseVO.class);
@@ -48,17 +44,17 @@ public class FoursquareService {
 
     public String getLoginUrl() {
 
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getHost() + this.OAUTH_PATH + "/authenticate")
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getHost() + this.foursquareConfigs.getOauthpath() + "/authenticate")
                 .queryParam("client_id", this.foursquareConfigs.getClientId())
                 .queryParam("response_type", "code")
-                .queryParam("redirect_uri", this.LOGIN_REDIRECT_END_POINT);
+                .queryParam("redirect_uri", this.foursquareConfigs.getLogin());
 
         return uriBuilder.toUriString();
     }
 
     public FoursquareUserVO requestUser(String accessToken) {
 
-        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.USERS_PATH + "/self"), accessToken);
+        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.foursquareConfigs.getUsers() + "/self"), accessToken);
         FoursquareUserResponseVO response = restTemplate.getForObject(endPoint, FoursquareUserResponseVO.class);
         return response.getResponse().getUser();
     }
@@ -66,7 +62,7 @@ public class FoursquareService {
     public List<VenueItemVO> requestVenues(FoursquareUserVO userVO, String accessToken) {
 
         ItemVO wishlist = filterWishList(userVO.getLists());
-        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.VENUES_LISTS_PATH + "/" + wishlist.getId()), accessToken);
+        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.foursquareConfigs.getWishlist() + "/" + wishlist.getId()), accessToken);
         FoursquareListResponseVO response = restTemplate.getForObject(endPoint, FoursquareListResponseVO.class);
         return response.getResponse().getList().getListItems().getItems();
     }
@@ -74,6 +70,12 @@ public class FoursquareService {
     private String toAuthenticableURL(UriComponentsBuilder uriBuilder, String accessToken) {
         return uriBuilder.queryParam("oauth_token", accessToken)
                 .queryParam("v", this.foursquareConfigs.getV()).toUriString();
+    }
+
+    public List<RecentVO> requestRecentChekinFriends(String accessToken) {
+        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.foursquareConfigs.getRecentechekin()), accessToken);
+        FoursquareRecentResponseVO response = restTemplate.getForObject(endPoint, FoursquareRecentResponseVO.class);
+        return response.getResponse().getRecent();
     }
 
     // TODO Improve filter mechanism
