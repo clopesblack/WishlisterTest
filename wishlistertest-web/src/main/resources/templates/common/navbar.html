@@ -1,10 +1,6 @@
-<nav th:fragment="common-navbar" class="navbar navbar-light bg-light">
-
-
-        <a class="navbar-brand" href="#">
-            <img src="http://getbootstrap.com/apple-touch-icon.png" width="30" height="30" class="d-inline-block align-top" alt=""/>
-            Bootstrap
-        </a>
-
-
+<nav th:fragment="common-navbar" class="navbar navbar-light bg-light ">
+    <a class="navbar-brand" href="#">
+        <img th:src="${user.photo.getPhotoIn(65)}" width="65" height="65" class="d-inline-block align-center" alt=""/>
+            <span th:text="'' + ${user.getExibitionName()} + ''" />
+    </a>
 </nav>

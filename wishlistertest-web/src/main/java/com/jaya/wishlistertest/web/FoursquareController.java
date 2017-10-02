@@ -1,7 +1,8 @@
 package com.jaya.wishlistertest.web;
 
 import com.jaya.wishlistertest.service.FoursquareService;
-import com.jaya.wishlistertest.service.vo.foursquare.FoursquareUserVO;
+import com.jaya.wishlistertest.service.vo.foursquare.list.VenueItemVO;
+import com.jaya.wishlistertest.service.vo.foursquare.user.FoursquareUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by Caroline Lopes on 30/09/17.
@@ -33,6 +35,9 @@ public class FoursquareController {
 
         FoursquareUserVO userVO = service.requestUser(accessToken);
         model.addAttribute("user", userVO);
+
+        List<VenueItemVO> venues = service.requestVenues(userVO, accessToken);
+        model.addAttribute("wishlist", venues);
 
         return "home";
     }
