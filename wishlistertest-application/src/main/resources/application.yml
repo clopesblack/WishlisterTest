@@ -7,5 +7,6 @@ spring:
     port: 6379
 
 foursquare:
-  host: https://foursquare.com/oauth2/authenticate
+  host: https://foursquare.com
   clientId: WQP3GYEKDDELPBTMTZAQ1VF04TKHJGPIMRWSFWBBHZT4MZEX
+  clientSecret: D41DBYIKBQQYWBR5MTG2O1BQCSSKMSY2EQNHT52AA5OFLPUQ

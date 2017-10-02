@@ -1,4 +1,4 @@
-package com.jaya.wishlistertest.web;
+package com.jaya.wishlistertest.service;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -14,4 +14,5 @@ public class FoursquareConfigs {
 
     private String host;
     private String clientId;
+    private String clientSecret;
 }

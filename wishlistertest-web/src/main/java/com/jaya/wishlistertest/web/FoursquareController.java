@@ -1,22 +1,32 @@
 package com.jaya.wishlistertest.web;
 
+import com.jaya.wishlistertest.service.FoursquareService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 
 /**
  * Created by Caroline Lopes on 30/09/17.
  */
-@RestController
+@Controller
 @RequestMapping("foursquare")
 public class FoursquareController {
 
+    private FoursquareService service;
+
+    @Autowired
+    public FoursquareController(FoursquareService service) {
+        this.service = service;
+    }
+
     @RequestMapping(value = "/callback", method = RequestMethod.GET)
-    public String callback(@RequestParam("code") String code, HttpSession httpSession) {
-        httpSession.setAttribute("fcode", "ieieieieiie");
-        return code;
+    public String callback(@RequestParam("code") String code, HttpSession session) {
+        String accessToken = service.requestUserAccessToken(code);
+        session.setAttribute("fuaccessToken", accessToken);
+        return "home";
     }
 }

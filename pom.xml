@@ -13,6 +13,7 @@
         <module>wishlistertest-web</module>
         <module>wishlistertest-resource</module>
         <module>wishlistertest-application</module>
+        <module>wishlistertest-service</module>
     </modules>
 
     <properties>
@@ -43,6 +44,11 @@
             <dependency>
                 <groupId>com.jaya</groupId>
                 <artifactId>wishlistertest-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jaya</groupId>
+                <artifactId>wishlistertest-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

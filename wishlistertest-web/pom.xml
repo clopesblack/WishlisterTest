@@ -12,6 +12,14 @@
     <artifactId>wishlistertest-web</artifactId>
 
     <dependencies>
+        <!-- INTERNAL -->
+        <dependency>
+            <groupId>com.jaya</groupId>
+            <artifactId>wishlistertest-service</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- EXTERNAL -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>

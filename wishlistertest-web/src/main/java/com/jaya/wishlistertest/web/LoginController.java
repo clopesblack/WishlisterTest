@@ -1,5 +1,6 @@
 package com.jaya.wishlistertest.web;
 
+import com.jaya.wishlistertest.service.FoursquareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,16 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
-    private FoursquareConfigs foursquareConfigs;
+    private FoursquareService foursquareService;
 
     @Autowired
-    public LoginController(FoursquareConfigs foursquareConfigs) {
-        this.foursquareConfigs = foursquareConfigs;
+    public LoginController(FoursquareService foursquareService) {
+        this.foursquareService = foursquareService;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginUrl(Model model) {
-        model.addAttribute("floginurl", foursquareConfigs.getHost() + "?client_id=" + foursquareConfigs.getClientId() + "&response_type=code&redirect_uri=http://localhost:3000/foursquare/callback");
+        model.addAttribute("floginurl", foursquareService.getLoginUrl());
         return "login";
     }
 }
