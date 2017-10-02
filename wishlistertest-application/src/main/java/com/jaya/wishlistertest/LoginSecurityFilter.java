@@ -17,7 +17,7 @@ import java.util.Set;
 @WebFilter(urlPatterns = "/*")
 public class LoginSecurityFilter implements Filter {
 
-    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/login", "/logout", "/foursquare/callback")));
+    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/login", "/logout", "/foursquare/callback", "/css/style.css")));
 
 
     @Override

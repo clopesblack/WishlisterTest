@@ -4,21 +4,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <title>Wishlister Test</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+<link rel="stylesheet" th:href="@{/css/style.css}" href="../../css/style.css" />
 </head>
 <body>
 
 <nav th:replace="common/navbar :: common-navbar" />
 
-<div>
-    <h3><p>WishList</p></h3>
+<div class="mt-5 ml-5">
+    <h4><p>WishList</p></h4>
     <div class="row">
-        <div class="card-group">
-            <div th:each="item : ${wishlist}" class="card w-25">
+        <div class="card-deck">
+            <div th:each="item : ${wishlist}" class="card">
                 <img th:src="${item.photo.getPhotoWith(200)}" width="318" height="180" class="d-inline-block align-center" alt=""/>
                 <div class="card-body">
                     <span>
                         <button type="button" class="btn btn-primary">DEL</button>
-                        <h4 th:text="${item.venue.name}" class="card-title"></h4>
+                        <span th:text="${item.venue.name}" class="card-title font-weight-bold"></span>
                     </span>
                 </div>
             </div>
@@ -26,25 +27,33 @@
     </div>
 </div>
 
-<div>
-    <h3><p>Recents</p></h3>
+<div class="mt-5 ml-5">
+    <h4><p>Recents</p></h4>
     <div class="row">
-        <div class="card-group">
+        <div class="card-deck">
             <!-- <div th:each="item : ${recents}" class="card w-25" th:if="${item.user.relationship} == 'friend'"> -->
-            <div th:each="item : ${recents}" class="card w-25" >
+            <div th:each="item : ${recents}" class="card" >
 
 
-                <th:block th:if="${item.getPhotos() != null and item.getPhotos().getItems() != null and !item.getPhotos().getItems().isEmpty()}">
-                    <img th:src="${item.getPhotos().getItems().get(0).getPhotoWith(300)}" width="318" height="180" class="d-inline-block align-center" alt=""/>
-                </th:block>
-                <th:block th:unless="${item.getPhotos() != null and item.getPhotos().getItems() != null and !item.getPhotos().getItems().isEmpty()}">
-                    <img src="https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw.jpg" width="318" height="180" class="d-inline-block align-center" alt=""/>
-                </th:block>
+                <div class="thumb-wrapper">
+                    <div class="thumb-user">
+                        <img th:src="${item.getUser().getPhoto().getPhotoWith(64)}" width="65" height="65" class="d-inline-block align-center" alt=""/>
+                    </div>
+
+                    <div>
+                        <th:block th:if="${item.getPhotos() != null and item.getPhotos().getItems() != null and !item.getPhotos().getItems().isEmpty()}">
+                            <img th:src="${item.getPhotos().getItems().get(0).getPhotoWith(300)}" width="318" height="180" class="d-inline-block align-center" alt=""/>
+                        </th:block>
+                        <th:block th:unless="${item.getPhotos() != null and item.getPhotos().getItems() != null and !item.getPhotos().getItems().isEmpty()}">
+                            <img src="https://pbs.twimg.com/profile_images/600060188872155136/st4Sp6Aw.jpg" width="318" height="180" class="d-inline-block align-center" alt=""/>
+                        </th:block>
+                    </div>
+                </div>
 
                 <div class="card-body">
                     <span>
                         <button type="button" class="btn btn-primary">ADD</button>
-                        <h4 th:text="${item.venue.name}" class="card-title"></h4>
+                        <span th:text="${item.venue.name}" class="card-title font-weight-bold"></span>
                     </span>
                 </div>
             </div>
