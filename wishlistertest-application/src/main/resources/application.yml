@@ -8,5 +8,7 @@ spring:
 
 foursquare:
   host: https://foursquare.com
+  api: https://api.foursquare.com/v2
   clientId: WQP3GYEKDDELPBTMTZAQ1VF04TKHJGPIMRWSFWBBHZT4MZEX
   clientSecret: D41DBYIKBQQYWBR5MTG2O1BQCSSKMSY2EQNHT52AA5OFLPUQ
+  v: 20171001

@@ -1,6 +1,8 @@
 package com.jaya.wishlistertest.service;
 
-import com.jaya.wishlistertest.service.vo.FoursquareAcessTokenResponseVO;
+import com.jaya.wishlistertest.service.vo.foursquare.FoursquareAcessTokenResponseVO;
+import com.jaya.wishlistertest.service.vo.foursquare.FoursquareUserResponseVO;
+import com.jaya.wishlistertest.service.vo.foursquare.FoursquareUserVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,6 +17,7 @@ public class FoursquareService {
     private final String LOGIN_REDIRECT_END_POINT = "http://localhost:3000/foursquare/callback";
     private final String ACCESS_TOKEN_REDIRECT_END_POINT = "http://localhost:3000/foursquare/callback/accesstoken";
     private final String OAUTH_PATH = "/oauth2";
+    private final String USERS_PATH = "/users";
 
     private FoursquareConfigs foursquareConfigs;
     private RestTemplate restTemplate;
@@ -49,4 +52,15 @@ public class FoursquareService {
         return uriBuilder.toUriString();
     }
 
+    public FoursquareUserVO requestUser(String accessToken) {
+
+        String endPoint = toAuthenticableURL(UriComponentsBuilder.fromHttpUrl(this.foursquareConfigs.getApi() + this.USERS_PATH + "/self"), accessToken);
+        FoursquareUserResponseVO response = restTemplate.getForObject(endPoint, FoursquareUserResponseVO.class);
+        return response.getResponse().getUser();
+    }
+
+    private String toAuthenticableURL(UriComponentsBuilder uriBuilder, String accessToken) {
+        return uriBuilder.queryParam("oauth_token", accessToken)
+                .queryParam("v", this.foursquareConfigs.getV()).toUriString();
+    }
 }

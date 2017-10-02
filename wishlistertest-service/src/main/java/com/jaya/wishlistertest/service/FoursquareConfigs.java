@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class FoursquareConfigs {
 
     private String host;
+    private String api;
     private String clientId;
     private String clientSecret;
+    private String v;
 }

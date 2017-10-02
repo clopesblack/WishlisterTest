@@ -1,4 +1,4 @@
-package com.jaya.wishlistertest.service.vo;
+package com.jaya.wishlistertest.service.vo.foursquare;
 
 import lombok.Data;
 
