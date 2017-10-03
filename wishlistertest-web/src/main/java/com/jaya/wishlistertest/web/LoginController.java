@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Caroline Lopes on 01/10/17.
@@ -24,5 +27,11 @@ public class LoginController {
     public String loginUrl(Model model) {
         model.addAttribute("floginurl", foursquareService.getLoginUrl());
         return "login";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        return new ModelAndView("redirect:/login");
     }
 }

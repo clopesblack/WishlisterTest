@@ -1,6 +1,10 @@
-<nav th:fragment="common-navbar" class="navbar navbar-light bg-light">
+<nav th:fragment="common-navbar" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <img th:src="${user.photo.getPhotoIn(65)}" width="65" height="65" class="d-inline-block align-center" alt=""/>
-            <span th:text="'' + ${user.getExibitionName()} + ''" />
+        <span th:text="'' + ${user.getExibitionName()} + ''"/>
     </a>
+
+    <span class="navbar-text">
+        <a href="/logout">Logout</a>
+    </span>
 </nav>
