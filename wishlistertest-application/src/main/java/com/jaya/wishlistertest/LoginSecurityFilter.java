@@ -17,7 +17,8 @@ import java.util.Set;
 @WebFilter(urlPatterns = "/*")
 public class LoginSecurityFilter implements Filter {
 
-    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList("/login", "/logout", "/foursquare/callback", "/css/style.css")));
+    private static final String LOGIN_PATH = "/login";
+    private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(LOGIN_PATH, "/logout", "/foursquare/callback", "/css/style.css")));
 
 
     @Override
@@ -34,6 +35,10 @@ public class LoginSecurityFilter implements Filter {
 
         boolean loggedIn = (session != null && session.getAttribute("fuaccessToken") != null);
         boolean allowedPath = ALLOWED_PATHS.contains(path);
+
+        if (path.equals(LOGIN_PATH) && loggedIn) {
+            response.sendRedirect(request.getContextPath() + "/");
+        }
 
         if (loggedIn || allowedPath) {
             chain.doFilter(servletRequest, servletResponse);

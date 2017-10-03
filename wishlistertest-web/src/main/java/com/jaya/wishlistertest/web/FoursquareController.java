@@ -18,7 +18,6 @@ import java.util.List;
  * Created by Caroline Lopes on 30/09/17.
  */
 @Controller
-@RequestMapping("foursquare")
 public class FoursquareController {
 
     private FoursquareService service;
@@ -28,12 +27,27 @@ public class FoursquareController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/callback", method = RequestMethod.GET)
+    @RequestMapping(value = "/foursquare/callback", method = RequestMethod.GET)
     public String callback(@RequestParam("code") String code, Model model, HttpSession session) {
 
         String accessToken = service.requestUserAccessToken(code);
         session.setAttribute("fuaccessToken", accessToken);
 
+        fillModelToHome(model, accessToken);
+
+        return "home";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home(Model model, HttpSession session) {
+
+        String fuaccessToken = (String) session.getAttribute("fuaccessToken");
+
+        fillModelToHome(model, fuaccessToken);
+        return "home";
+    }
+
+    private void fillModelToHome(Model model, String accessToken) {
         FoursquareUserVO userVO = service.requestUser(accessToken);
         model.addAttribute("user", userVO);
 
@@ -42,7 +56,6 @@ public class FoursquareController {
 
         List<RecentVO> recents = service.requestRecentChekinFriends(accessToken);
         model.addAttribute("recents", recents);
-
-        return "home";
     }
+
 }

@@ -25,9 +25,4 @@ public class LoginController {
         model.addAttribute("floginurl", foursquareService.getLoginUrl());
         return "login";
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String loginUrl() {
-        return "home";
-    }
 }
