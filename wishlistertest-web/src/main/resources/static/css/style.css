@@ -1,6 +1,13 @@
+.btn-lg-wrapper {
+    display: block;
+    margin: auto;
+    margin-top: 25%;
+    text-align: center;
+}
+
 .btn-foursquare {
     color: #fff;
-    background-color: #f94877 ! Important ;
+    background-color: #f94877;
     border-color: rgba(0,0,0,0.2);
 }
 
@@ -18,7 +25,7 @@
 }
 
 .btn-social :first-child {
-    position: absolute;
+    position: relative;
     left: 0;
     top: 0;
     bottom: 0;
