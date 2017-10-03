@@ -31,9 +31,7 @@
     <h4><p>Recents</p></h4>
     <div class="row">
         <div class="card-deck">
-            <!-- <div th:each="item : ${recents}" class="card w-25" th:if="${item.user.relationship} == 'friend'"> -->
-            <div th:each="item : ${recents}" class="card" >
-
+            <div th:each="item : ${recents}" class="card" th:if="${item.user.relationship} == 'friend'">
 
                 <div class="thumb-wrapper">
                     <div class="thumb-user">
